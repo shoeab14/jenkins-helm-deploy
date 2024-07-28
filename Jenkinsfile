@@ -29,7 +29,7 @@ pipeline {
         }
     }
     stage('Build on kubernetes') {
-        step {
+        steps {
             withKubeConfig([credentialsId: 'kubeconfig']) {
                 sh 'pwd'
                 sh 'cp -R helm/* .'
