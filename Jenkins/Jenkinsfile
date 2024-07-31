@@ -13,6 +13,12 @@ pipeline {
                 sh 'cp -r target/*.jar docker'
             }
         }
+        stage ('unit tests') {
+            steps {
+                sh 'pwd'
+                sh 'mvn test'
+            }
+        }
         stage ('build docker') {
             steps {
                 script {
@@ -21,12 +27,6 @@ pipeline {
                     customImage.push()
                 }
             }
-        }
-    }
-    stage ('unit tests') {
-        steps {
-            sh 'pwd'
-            sh 'mvn'
         }
     }
     stage ('Build on kubernetes') {
