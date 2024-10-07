@@ -29,7 +29,7 @@ pipeline {
                 }
             }
         }
-        stage ('build on kubernetes')
+        stage ('build on kubernetes') {
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
                     sh 'pwd'
@@ -37,6 +37,7 @@ pipeline {
                     sh 'ls -ltrh'
                     sh 'pwd'
                     sh '/usr/local/bin/helm upgrade --install petclinic-app petclinic --set image.repository=shoeab14/petclinic --set image.tag=${BUILD_NUMBER}'
+                }
             }
         }
     }
